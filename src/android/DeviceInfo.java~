@@ -9,14 +9,12 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 import android.os.Build;
-import android.provider.Settings;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 
 public class DeviceInfo extends CordovaPlugin {
   CallbackContext context;
-  private static final String ANDROID_PLATFORM = "Android";
 
   @Override
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException 
@@ -53,16 +51,12 @@ public class DeviceInfo extends CordovaPlugin {
       info.put("roaming", tm.isNetworkRoaming());
       info.put("model", getModelName());
       info.put("manufacturer", getManufacturerName());
-      info.put("product_name", getProductName());
-      info.put("os_type", ANDROID_PLATFORM);
-      info.put("os_version", getOSVersion());
-      info.put("uuid", getUuid());
       info.put("phone_type", getPhoneType(tm));
       info.put("ip", getLocalIpAddress());
       info.put("connection_type", connectionType(cordova.getActivity()));
     } 
     catch (JSONException e) {
-      e.printStackTrace();
+        e.printStackTrace();
     }
     return info;
   }
@@ -102,13 +96,13 @@ public class DeviceInfo extends CordovaPlugin {
     switch (phoneType)   
     {  
       case (TelephonyManager.PHONE_TYPE_CDMA):  
-      type = "CDMA";  
+        type = "CDMA";  
       break;  
       case (TelephonyManager.PHONE_TYPE_GSM):   
-      type = "GSM";                
+        type = "GSM";                
       break;  
       case (TelephonyManager.PHONE_TYPE_NONE):  
-      type = "NONE";                
+        type = "NONE";                
       break;  
     }  
     return type;
@@ -125,21 +119,6 @@ public class DeviceInfo extends CordovaPlugin {
     return capitalize(manufacturer);
   }
 
-  private String getOSVersion() {
-    String osversion = Build.VERSION.RELEASE;
-    return osversion;
-  }
-
-  private String getProductName() {
-    String productname = Build.PRODUCT;
-    return productname;
-  }
-
-  public String getUuid() {
-    String uuid = Settings.Secure.getString(this.cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
-    return uuid;
-  }
-
   private String capitalize(String s) {
     if (s == null || s.length() == 0) {
       return "";
@@ -152,7 +131,7 @@ public class DeviceInfo extends CordovaPlugin {
     }
   }
 
-  private String getLocalIpAddress(){
+  public String getLocalIpAddress(){
     try {
       for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();  
         en.hasMoreElements();)
