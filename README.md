@@ -28,18 +28,19 @@ This plugin provides information about the device's Hardware and software.
     function onSuccess(info) {
         alert("Phone Number: "  + info.msisdn + "\n" +
           "IMEI Number: "       + info.imei + "\n" +
-          "UUID: "              + deviceInfo.uuid + "\n" +
+          "UUID: "              + info.uuid + "\n" +
           "Sim Operator: "      + info.operator + "\n" +
           "Sim Operator Name: " + info.operator_name + "\n" +
           "Country ISO: "       + info.country_iso + "\n" +
           "Roaming: "           + info.roaming + "\n" +
           "Device Model: "      + info.model + "\n" +
           "Device Manufacturer: "   + info.manufacturer + "\n" +
-          "Product Name: "      + deviceInfo.product_name + "\n" +
-          "OS Type: "           + deviceInfo.os_type + "\n" +
-          "OS Version: "        + deviceInfo.os_version + "\n" +
+          "Product Name: "      + info.product_name + "\n" +
+          "OS Type: "           + info.os_type + "\n" +
+          "OS Version: "        + info.os_version + "\n" +
           "Phone Type: "        + info.phone_type + "\n" +
           "IP Address: "        + info.ip + "\n" +
+          "Time Zone: "         + info.timezone + "\n" +
           "Connection Type: "   + info.connection_type
         );
     };

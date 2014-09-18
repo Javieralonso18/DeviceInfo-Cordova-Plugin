@@ -13,6 +13,7 @@ import android.provider.Settings;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
+import java.util.TimeZone;
 
 public class DeviceInfo extends CordovaPlugin {
   CallbackContext context;
@@ -59,6 +60,7 @@ public class DeviceInfo extends CordovaPlugin {
       info.put("uuid", getUuid());
       info.put("phone_type", getPhoneType(tm));
       info.put("ip", getLocalIpAddress());
+      info.put("timezone", getTimeZoneID());
       info.put("connection_type", connectionType(cordova.getActivity()));
     } 
     catch (JSONException e) {
@@ -138,6 +140,11 @@ public class DeviceInfo extends CordovaPlugin {
   public String getUuid() {
     String uuid = Settings.Secure.getString(this.cordova.getActivity().getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
     return uuid;
+  }
+
+  public String getTimeZoneID() {
+    TimeZone tz = TimeZone.getDefault();
+    return (tz.getID());
   }
 
   private String capitalize(String s) {
