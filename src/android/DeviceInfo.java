@@ -47,7 +47,7 @@ public class DeviceInfo extends CordovaPlugin {
 
     try {
      info.put("imei", "");
-     if (Build.VERSION_CODES.Q >= getOSSdk()){
+     if (Build.VERSION_CODES.Q > getOSSdk()){
       info.put("imei", tm.getDeviceId());
     }
 
