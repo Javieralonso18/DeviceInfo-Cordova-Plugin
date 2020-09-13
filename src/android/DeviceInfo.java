@@ -47,26 +47,28 @@ public class DeviceInfo extends CordovaPlugin {
 
     try {
      info.put("imei", "");
-     if (getOSVersion() < 10){
-       info.put("imei", tm.getDeviceId());
-     }
-     info.put("msisdn", tm.getLine1Number()); 
-     info.put("operator", tm.getNetworkOperator());
-     info.put("operator_name", tm.getNetworkOperatorName());
-     info.put("country_iso", tm.getNetworkCountryIso());
-     info.put("roaming", tm.isNetworkRoaming());
-     info.put("model", getModelName());
-     info.put("manufacturer", getManufacturerName());
-     info.put("product_name", getProductName());
-     info.put("os_type", ANDROID_PLATFORM);
-     info.put("os_version", getOSVersion());
-     info.put("uuid", getUuid());
-     info.put("phone_type", getPhoneType(tm));
-     info.put("ip", getLocalIpAddress());
-     info.put("timezone", getTimeZoneID());
-     info.put("connection_type", connectionType(cordova.getActivity()));
-   } 
-   catch (JSONException e) {
+     if (Build.VERSION_CODES.Q >= getOSSdk()){
+      info.put("imei", tm.getDeviceId());
+    }
+
+    info.put("msisdn", tm.getLine1Number()); 
+    info.put("operator", tm.getNetworkOperator());
+    info.put("operator_name", tm.getNetworkOperatorName());
+    info.put("country_iso", tm.getNetworkCountryIso());
+    info.put("roaming", tm.isNetworkRoaming());
+    info.put("model", getModelName());
+    info.put("manufacturer", getManufacturerName());
+    info.put("product_name", getProductName());
+    info.put("os_type", ANDROID_PLATFORM);
+    info.put("os_version", getOSVersion());
+    info.put("os_sdk", getOSSdk());
+    info.put("uuid", getUuid());
+    info.put("phone_type", getPhoneType(tm));
+    info.put("ip", getLocalIpAddress());
+    info.put("timezone", getTimeZoneID());
+    info.put("connection_type", connectionType(cordova.getActivity()));
+  } 
+  catch (JSONException e) {
     e.printStackTrace();
   }
   return info;
@@ -133,6 +135,11 @@ private String getManufacturerName()
 private String getOSVersion() {
   String osversion = Build.VERSION.RELEASE;
   return osversion;
+}
+
+private Integer getOSSdk() {
+  Integer ossdk = Build.SDK_INT;
+  return ossdk;
 }
 
 private String getProductName() {
