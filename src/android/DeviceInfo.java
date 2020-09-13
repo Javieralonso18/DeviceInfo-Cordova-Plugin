@@ -138,7 +138,7 @@ private String getOSVersion() {
 }
 
 private Integer getOSSdk() {
-  Integer ossdk = Build.SDK_INT;
+  Integer ossdk = Build.VERSION.SDK_INT;
   return ossdk;
 }
 
