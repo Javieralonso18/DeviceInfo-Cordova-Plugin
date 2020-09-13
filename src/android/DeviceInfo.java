@@ -47,7 +47,7 @@ public class DeviceInfo extends CordovaPlugin {
 
     try {
       info.put("msisdn", tm.getLine1Number());
-      info.put("imei", tm.getDeviceId());
+      //info.put("imei", tm.getDeviceId());
       info.put("operator", tm.getNetworkOperator());
       info.put("operator_name", tm.getNetworkOperatorName());
       info.put("country_iso", tm.getNetworkCountryIso());
