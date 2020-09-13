@@ -64,7 +64,7 @@ public class DeviceInfo extends CordovaPlugin {
       info.put("connection_type", connectionType(cordova.getActivity()));
     } 
     catch (JSONException e) {
-     // e.printStackTrace();
+      e.printStackTrace();
     }
     return info;
   }
